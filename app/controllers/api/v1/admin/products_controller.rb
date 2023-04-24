@@ -64,6 +64,8 @@ module Api
               min_stock_quantity
               max_stock_quantity
               status
+              base_measurement_unit_id
+              product_presentation_id
             ]
           )
         end
