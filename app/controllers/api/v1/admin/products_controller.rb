@@ -16,7 +16,7 @@ module Api
         end
 
         def create
-          @product = Product.build(product_params)
+          @product = Product.new(product_params)
           if product.save
             render json: serialized_response(product), status: :created
           else

@@ -17,7 +17,7 @@ module Api
         end
 
         def create
-          @customer = Customer.build(customer_params)
+          @customer = Customer.new(customer_params)
           if customer.save
             render json: serialized_response(customer), status: :created
           else

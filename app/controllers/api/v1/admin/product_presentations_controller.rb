@@ -16,7 +16,7 @@ module Api
         end
 
         def create
-          @product_presentation = ProductPresentation.build(
+          @product_presentation = ProductPresentation.new(
             product_presentation_params
           )
           if product_presentation.save

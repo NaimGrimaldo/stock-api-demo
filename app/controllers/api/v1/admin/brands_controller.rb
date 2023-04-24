@@ -16,7 +16,7 @@ module Api
         end
 
         def create
-          @brand = Brand.build(brand_params)
+          @brand = Brand.new(brand_params)
           if brand.save
             render json: serialized_response(brand), status: :created
           else

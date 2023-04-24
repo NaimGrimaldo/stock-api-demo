@@ -16,7 +16,7 @@ module Api
         end
 
         def create
-          @base_measurement_unit = BaseMeasurementUnit.build(
+          @base_measurement_unit = BaseMeasurementUnit.new(
             base_measurement_unit_params
           )
           if base_measurement_unit.save

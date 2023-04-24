@@ -17,7 +17,7 @@ module Api
         end
 
         def create
-          @provider = Provider.build(provider_params)
+          @provider = Provider.new(provider_params)
           if provider.save
             render json: serialized_response(provider), status: :created
           else
