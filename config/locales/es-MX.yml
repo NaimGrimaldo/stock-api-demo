@@ -1,0 +1,377 @@
+es-MX:
+  enums:
+    product:
+      status:
+        stocked: Existencia
+        out_stocked: Agotado
+        discontinued: Descontinuado
+        over_stocked: Sobre existencia
+    user:
+      gender:
+        male: Masculino
+        female: Femenino
+      role:
+        admin: Administrativo
+        supervisor: Supervisor
+        salesman: Vendedor
+    customer:
+      gender:
+        male: Masculino
+        female: Femenino
+      customer_type:
+        company: Compañia
+        person: Persona Física
+    provider:
+      provider_type:
+        company: Compañia
+        person: Persona Física
+    transaction:
+      status:
+        pending: Pendiente
+        approved: Aprobada
+        rejected: Rechazada
+      transaction_type:
+        purchase: Compra
+        sale: Venta
+  activerecord:
+    models:
+      customer:
+        one: Cliente
+        other: Clientes
+      user:
+        one: Usuario
+        other: Usuarios
+      provider:
+        one: Proveedor
+        other: Proveedores
+      product:
+        one: Producto
+        other: Productos
+      transaction:
+        one: Transacción
+        other: Transacciones
+      base_measurement_unit:
+        one: Unidad de medida base
+        other: Unidades de medida base
+      product_presentation:
+        one: Presentación de producto
+        other: Presentaciones de producto
+      address:
+        one: Dirección
+        other: Direcciones
+      brand:
+        one: Marca
+        other: Marcas
+    attributes:
+      customer:
+        legal_name: Razón social
+        nickname: usuario
+        first_name: Primer nombre
+        middle_name: Segundo nombre
+        last_name: Apellido Paterno
+        maternal_last_name: Apellido Materno
+        birth_date: Fecha de nacimiento
+        email: Correo electrónico
+        phone: Teléfono
+        gender: Género
+        rfc: RFC
+        curp: CURP
+        nationality: Nacionalidad
+        customer_type: Tipo
+      provider:
+        legal_name: Razón social
+        nickname: usuario
+        first_name: Primer nombre
+        middle_name: Segundo nombre
+        last_name: Apellido Paterno
+        maternal_last_name: Apellido Materno
+        birth_date: Fecha de nacimiento
+        email: Correo electrónico
+        phone: Teléfono
+        website: Sitio Web
+        rfc: RFC
+        curp: CURP
+        nationality: Nacionalidad
+        internal_id: Número de control interno
+        starts_on: Fecha de convenio
+        provider_type: Tipo
+      user:
+        legal_name: Razón social
+        nickname: usuario
+        first_name: Primer nombre
+        middle_name: Segundo nombre
+        last_name: Apellido Paterno
+        maternal_last_name: Apellido Materno
+        birth_date: Fecha de nacimiento
+        email: Correo electrónico
+        phone: Teléfono
+        gender: Género
+        rfc: RFC
+        curp: CURP
+        nationality: Nacionalidad
+        role: Role
+        internal_id: Número de control interno
+        starts_on: Fecha de contratación
+      brand:
+        name: Marca
+      base_measurement_unit:
+        name: Nombre
+        description: Descripción
+      product:
+        name: Nombre
+        description: Descripción
+        internal_id: Número de control interno
+        purchase_price: Precio de compra
+        sale_price: Precio de venta
+        stock_quantity: Cantidad en existencia
+        min_stock_quantity: Mínima cantidad permitida
+        max_stock_quantity: Máxima cantidad permitida
+        status: Estatus
+      transaction:
+        owner: Entidad
+        user: Usuario
+        transaction_type: Tipo
+        status: Estatus
+        product: Producto
+        quantity: Cantidad
+        total: Total de transacción
+      address:
+        owner: Entidad
+        street: Calle
+        exterior_number: Número exterior
+        interior_number: Número interior
+        neighborhood: Colonia
+        municipality: Delegación
+        city: Ciudad
+        state: Estado
+        zip_code: Código Postal
+        country: País
+      product_presentation:
+        name: Nombre
+        description: Descipción
+        factor_per_item: Cantidad por empaque
+        nickname: Alias
+    errors:
+      messages:
+        record_invalid: Registro inválido
+      models:
+        product:
+          quantity_overflowed: 'La cantidad de stock no esta dentro del rango permitido.'
+          discontinued: 'El producto se encuentra descontinuado.'
+        transaction:
+          max_stock_quantity_overflowed: 'El producto supera el stock máximo permitido.'
+          min_stock_quantity_overflowed: 'El producto no cuenta con el stock necesario.'
+          not_allowed_for_provider: 'Tipo de transacción no permitida para Proveedores'
+          not_allowed_for_customer: 'Tipo de transacción no permitida para Clientes'
+  date:
+    abbr_day_names:
+    - dom
+    - lun
+    - mar
+    - mié
+    - jue
+    - vie
+    - sáb
+    abbr_month_names:
+    -
+    - ene
+    - feb
+    - mar
+    - abr
+    - may
+    - jun
+    - jul
+    - ago
+    - sep
+    - oct
+    - nov
+    - dic
+    day_names:
+    - domingo
+    - lunes
+    - martes
+    - miércoles
+    - jueves
+    - viernes
+    - sábado
+    formats:
+      default: "%d/%m/%Y"
+      long: "%A, %d de %B de %Y"
+      short: "%d de %b"
+    month_names:
+    -
+    - enero
+    - febrero
+    - marzo
+    - abril
+    - mayo
+    - junio
+    - julio
+    - agosto
+    - septiembre
+    - octubre
+    - noviembre
+    - diciembre
+    order:
+    - :day
+    - :month
+    - :year
+  datetime:
+    distance_in_words:
+      about_x_hours:
+        one: cerca de 1 hora
+        other: cerca de %{count} horas
+      about_x_months:
+        one: cerca de 1 mes
+        other: cerca de %{count} meses
+      about_x_years:
+        one: cerca de 1 año
+        other: cerca de %{count} años
+      almost_x_years:
+        one: casi 1 año
+        other: casi %{count} años
+      half_a_minute: medio minuto
+      less_than_x_seconds:
+        one: menos de 1 segundo
+        other: menos de %{count} segundos
+      less_than_x_minutes:
+        one: menos de 1 minuto
+        other: menos de %{count} minutos
+      over_x_years:
+        one: más de 1 año
+        other: más de %{count} años
+      x_seconds:
+        one: 1 segundo
+        other: "%{count} segundos"
+      x_minutes:
+        one: 1 minuto
+        other: "%{count} minutos"
+      x_days:
+        one: 1 día
+        other: "%{count} días"
+      x_months:
+        one: 1 mes
+        other: "%{count} meses"
+      x_years:
+        one: 1 año
+        other: "%{count} años"
+    prompts:
+      second: Segundo
+      minute: Minuto
+      hour: Hora
+      day: Día
+      month: Mes
+      year: Año
+  errors:
+    format: "%{attribute} %{message}"
+    messages:
+      accepted: debe ser aceptado
+      base: instancia no válida
+      blank: no puede estar en blanco
+      confirmation: no coincide
+      empty: no puede estar vacío
+      equal_to: debe ser igual a %{count}
+      even: debe ser un número par
+      exclusion: está reservado
+      greater_than: debe ser mayor que %{count}
+      greater_than_or_equal_to: debe ser mayor o igual que %{count}
+      inclusion: no está incluido en la lista
+      invalid: es inválido
+      less_than: debe ser menor que %{count}
+      less_than_or_equal_to: debe ser menor o igual que %{count}
+      model_invalid: 'La validación falló: %{errors}'
+      not_a_number: no es un número
+      not_an_integer: debe ser un entero
+      odd: debe ser un número non
+      other_than: debe ser diferente a %{count}
+      present: debe estar en blanco
+      required: debe existir
+      taken: ya ha sido tomado
+      too_long:
+        one: es demasiado largo (máximo 1 caracter)
+        other: es demasiado largo (máximo %{count} caracteres)
+      too_short:
+        one: es demasiado corto (mínimo 1 caracter)
+        other: es demasiado corto (mínimo %{count} caracteres)
+      wrong_length:
+        one: longitud errónea (debe ser de 1 caracter)
+        other: longitud errónea (debe ser de %{count} caracteres)
+    template:
+      body: 'Revise que los siguientes campos sean válidos:'
+      header:
+        one: "%{model} no pudo guardarse debido a 1 error"
+        other: "%{model} no pudo guardarse debido a %{count} errores"
+  helpers:
+    select:
+      prompt: Por favor selecciona
+    submit:
+      create: Crear %{model}
+      submit: Guardar %{model}
+      update: Actualizar %{model}
+  number:
+    currency:
+      format:
+        delimiter: ","
+        format: "%u%n"
+        precision: 2
+        separator: "."
+        significant: false
+        strip_insignificant_zeros: false
+        unit: "$"
+    format:
+      delimiter: ","
+      precision: 2
+      separator: "."
+      significant: false
+      strip_insignificant_zeros: false
+    human:
+      decimal_units:
+        format: "%n %u"
+        units:
+          billion: mil millones
+          million:
+            one: millón
+            other: millones
+          quadrillion: mil billones
+          thousand: mil
+          trillion:
+            one: billón
+            other: billones
+          unit: ''
+      format:
+        delimiter: ","
+        precision: 3
+        significant: true
+        strip_insignificant_zeros: true
+      storage_units:
+        format: "%n %u"
+        units:
+          byte:
+            one: Byte
+            other: Bytes
+          eb: EB
+          gb: GB
+          kb: KB
+          mb: MB
+          pb: PB
+          tb: TB
+    percentage:
+      format:
+        delimiter: ","
+        format: "%n%"
+    precision:
+      format:
+        delimiter: ","
+  support:
+    array:
+      last_word_connector: " y "
+      two_words_connector: " y "
+      words_connector: ", "
+  time:
+    am: am
+    formats:
+      default: "%a, %d de %b de %Y a las %H:%M:%S %Z"
+      long: "%A, %d de %B de %Y a las %I:%M %p"
+      short: "%d de %b a las %H:%M hrs"
+      date_long: "%d de %B de %Y"
+    pm: pm

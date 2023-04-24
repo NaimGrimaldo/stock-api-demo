@@ -1,0 +1,75 @@
+require:
+  - rubocop-rails
+  - rubocop-performance
+
+Layout/LineLength:
+  Max: 80
+  AllowedPatterns: ['\A#']
+  Exclude:
+    - lib/extensions/**/*
+    - spec/**/*
+    - config/environments/*
+    - config/puma.rb
+    - Rakefile
+
+Metrics/AbcSize:
+  Max: 25
+Metrics/ModuleLength:
+  Enabled: false
+Metrics/ClassLength:
+  Max: 160
+  Exclude:
+    - 'app/lib/**/*.rb'
+Metrics/BlockLength:
+  Exclude:
+    - '**/*.rake'
+    - 'spec/**/*.rb'
+    - 'config/routes.rb'
+    - '**/concerns/**/*.rb'
+    - 'Rakefile'
+Metrics/MethodLength:
+  Max: 16
+  Exclude:
+    - 'spec/**/*.rb'
+Metrics/PerceivedComplexity:
+  Enabled: true
+Metrics/CyclomaticComplexity:
+  Enabled: true
+
+Rails/EnvironmentVariableAccess:
+  AllowReads: true
+Rails/LexicallyScopedActionFilter:
+  Enabled: true
+Rails/HasAndBelongsToMany:
+  Enabled: false
+Rails/SkipsModelValidations:
+  Enabled: false
+Rails/UnknownEnv:
+  Enabled: false
+Rails/Output:
+  Exclude:
+    - db/seeds.rb
+
+Style/BlockDelimiters:
+  Exclude:
+    - spec/**/*_spec.rb
+Style/Documentation:
+  Enabled: false
+Style/OpenStructUse:
+  Enabled: false
+Style/HashSyntax:
+  Enabled: false
+Style/RedundantFreeze:
+  Enabled: false
+
+AllCops:
+  TargetRubyVersion: 3.2.1
+  DisplayCopNames: true
+  NewCops: enable
+  SuggestExtensions: false
+  Exclude:
+    - bin/**
+    - db/schema.rb
+    - db/migrate/**
+    - db/seeds/**/*.rb
+    - config/initializers/**
