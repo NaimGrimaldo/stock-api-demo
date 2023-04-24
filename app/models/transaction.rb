@@ -62,6 +62,8 @@ class Transaction < ApplicationRecord
   end
 
   def can_be_processed?
+    return negative_quantity_error if quantity.negative?
+
     return discontinued_product_error if product_discontinued?
 
     return purchase_validation_process? if purchase?
@@ -118,6 +120,15 @@ class Transaction < ApplicationRecord
         )
       )
     end
+  end
+
+  def negative_quantity_error
+    errors.add(
+      :quantity,
+      I18n.t(
+        'activerecord.errors.models.transaction.negative_quantity'
+      )
+    )
   end
 
   def calculate_total_amount!

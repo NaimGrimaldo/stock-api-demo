@@ -9,37 +9,37 @@ module Api
 
         def index
           collection = Provider.all
-          render json: parsed_response(object: collection)
+          render json: serialized_response(collection)
         end
 
         def show
-          render json: parsed_response
+          render json: serialized_response(provider)
         end
 
         def create
           @provider = Provider.build(provider_params)
           if provider.save
-            render json: parsed_response, status: :created
+            render json: serialized_response(provider), status: :created
           else
-            render json: parsed_response(errors: provider.errors),
+            render json: serialized_response(provider),
                    status: :unprocessable_entity
           end
         end
 
         def update
           if provider.update(provider_params)
-            render json: parsed_response, status: :created
+            render json: serialized_response(provider), status: :created
           else
-            render json: parsed_response(errors: provider.errors),
+            render json: serialized_response(provider),
                    status: :unprocessable_entity
           end
         end
 
         def products
           collection = provider.products
-          render json: ProductSerializer.new(
-            collection
-          ).serializable_hash.as_json
+          render json: serialized_response(
+            collection, serializer: ProductSerializer
+          )
         end
 
         def destroy
@@ -55,12 +55,8 @@ module Api
           @provider = Provider.find(params[:id])
         end
 
-        def parsed_response(object: provider, errors: {},
-                            options: {})
-          ProviderSerializer.new(
-            object,
-            options.merge!(errors)
-          ).serializable_hash.to_json
+        def object_serializer
+          ProviderSerializer
         end
 
         def provider_params

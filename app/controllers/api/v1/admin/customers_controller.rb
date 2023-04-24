@@ -9,28 +9,28 @@ module Api
 
         def index
           collection = Customer.all
-          render json: parsed_response(object: collection)
+          render json: serialized_response(collection)
         end
 
         def show
-          render json: parsed_response
+          render json: serialized_response(customer)
         end
 
         def create
           @customer = Customer.build(customer_params)
           if customer.save
-            render json: parsed_response, status: :created
+            render json: serialized_response(customer), status: :created
           else
-            render json: parsed_response(errors: customer.errors),
+            render json: serialized_response(customer),
                    status: :unprocessable_entity
           end
         end
 
         def update
           if customer.update(customer_params)
-            render json: parsed_response, status: :created
+            render json: serialized_response(customer), status: :created
           else
-            render json: parsed_response(errors: customer.errors),
+            render json: serialized_response(customer),
                    status: :unprocessable_entity
           end
         end
@@ -42,9 +42,8 @@ module Api
 
         def products
           collection = provider.products
-          render json: ProductSerializer.new(
-            collection
-          ).serializable_hash.as_json
+          render json: serialized_response(collection,
+                                           serializer: ProductSerializer)
         end
 
         private
@@ -55,12 +54,8 @@ module Api
           @customer = Customer.find(params[:id])
         end
 
-        def parsed_response(object: customer, errors: {},
-                            options: {})
-          CustomerSerializer.new(
-            object,
-            options.merge!(errors)
-          ).serializable_hash.to_json
+        def object_serializer
+          CustomerSerializer
         end
 
         def customer_params

@@ -8,28 +8,28 @@ module Api
 
         def index
           collection = scope.all
-          render json: parsed_response(object: collection)
+          render json: serialized_response(collection)
         end
 
         def show
-          render json: parsed_response
+          render json: serialized_response(address)
         end
 
         def create
           @address = scope.build(address_params)
           if address.save
-            render json: parsed_response, status: :created
+            render json: serialized_response(address), status: :created
           else
-            render json: parsed_response(errors: address.errors),
+            render json: serialized_response(address),
                    status: :unprocessable_entity
           end
         end
 
         def update
           if address.update(address_params)
-            render json: parsed_response, status: :created
+            render json: serialized_response(address), status: :created
           else
-            render json: parsed_response(errors: address.errors),
+            render json: serialized_response(address),
                    status: :unprocessable_entity
           end
         end
@@ -55,11 +55,8 @@ module Api
           end
         end
 
-        def parsed_response(object: address, errors: {}, options: {})
-          AddressSerializer.new(
-            object,
-            options.merge!(errors)
-          ).serializable_hash.to_json
+        def object_serializer
+          AddressSerializer
         end
 
         def address_params

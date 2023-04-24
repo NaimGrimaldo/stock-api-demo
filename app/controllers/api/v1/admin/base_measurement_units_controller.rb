@@ -8,11 +8,11 @@ module Api
 
         def index
           collection = BaseMeasurementUnit.all
-          render json: parsed_response(object: collection)
+          render json: serialized_response(collection)
         end
 
         def show
-          render json: parsed_response
+          render json: serialized_response(base_measurement_unit)
         end
 
         def create
@@ -20,18 +20,20 @@ module Api
             base_measurement_unit_params
           )
           if base_measurement_unit.save
-            render json: parsed_response, status: :created
+            render json: serialized_response(base_measurement_unit),
+                   status: :created
           else
-            render json: parsed_response(errors: base_measurement_unit.errors),
+            render json: serialized_response(base_measurement_unit),
                    status: :unprocessable_entity
           end
         end
 
         def update
           if base_measurement_unit.update(base_measurement_unit_params)
-            render json: parsed_response, status: :created
+            render json: serialized_response(base_measurement_unit),
+                   status: :created
           else
-            render json: parsed_response(errors: base_measurement_unit.errors),
+            render json: serialized_response(base_measurement_unit),
                    status: :unprocessable_entity
           end
         end
@@ -49,12 +51,8 @@ module Api
           @base_measurement_unit = BaseMeasurementUnit.find(params[:id])
         end
 
-        def parsed_response(object: base_measurement_unit, errors: {},
-                            options: {})
-          BaseMeasurementUnitSerializer.new(
-            object,
-            options.merge!(errors)
-          ).serializable_hash.to_json
+        def object_serializer
+          BaseMeasurementUnitSerializer
         end
 
         def base_measurement_unit_params

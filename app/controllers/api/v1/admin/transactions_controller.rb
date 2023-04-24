@@ -8,28 +8,28 @@ module Api
 
         def index
           collection = scope.all
-          render json: parsed_response(object: collection)
+          render json: serialized_response(collection)
         end
 
         def show
-          render json: parsed_response
+          render json: serialized_response(transaction)
         end
 
         def create
           @transaction = scope.build(transaction_params)
           if transaction.save
-            render json: parsed_response, status: :created
+            render json: serialized_response(transaction), status: :created
           else
-            render json: parsed_response(errors: transaction.errors),
+            render json: serialized_response(transaction),
                    status: :unprocessable_entity
           end
         end
 
         def update
           if transaction.update(transaction_params)
-            render json: parsed_response, status: :created
+            render json: serialized_response(transaction), status: :created
           else
-            render json: parsed_response(errors: transaction.errors),
+            render json: serialized_response(transaction),
                    status: :unprocessable_entity
           end
         end
@@ -55,11 +55,8 @@ module Api
           end
         end
 
-        def parsed_response(object: transaction, errors: {}, options: {})
-          TransactionSerializer.new(
-            object,
-            options.merge!(meta: { errors: errors.full_messages.as_json })
-          ).serializable_hash.to_json
+        def object_serializer
+          TransactionSerializer
         end
 
         def transaction_params

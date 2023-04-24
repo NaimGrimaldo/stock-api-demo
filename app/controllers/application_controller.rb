@@ -14,4 +14,15 @@ class ApplicationController < ActionController::API
   def health_check
     head :ok
   end
+
+  private
+
+  def serialized_response(object, options: {}, serializer: object_serializer)
+    meta = {}
+    meta[:errors] = object.errors.full_messages.as_json if object.errors.any?
+    serializer.new(
+      object,
+      options.merge!(meta: meta)
+    ).serializable_hash.to_json
+  end
 end

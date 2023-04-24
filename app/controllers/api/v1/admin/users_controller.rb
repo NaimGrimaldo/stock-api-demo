@@ -8,28 +8,28 @@ module Api
 
         def index
           collection = User.all
-          render json: parsed_response(object: collection)
+          render json: serialized_response(collection)
         end
 
         def show
-          render json: parsed_response
+          render json: serialized_response(user)
         end
 
         def create
           @user = User.build(user_params)
           if user.save
-            render json: parsed_response, status: :created
+            render json: serialized_response(user), status: :created
           else
-            render json: parsed_response(errors: user.errors),
+            render json: serialized_response(user),
                    status: :unprocessable_entity
           end
         end
 
         def update
           if user.update(user_params)
-            render json: parsed_response, status: :created
+            render json: serialized_response(user), status: :created
           else
-            render json: parsed_response(errors: user.errors),
+            render json: serialized_response(user),
                    status: :unprocessable_entity
           end
         end
@@ -47,12 +47,8 @@ module Api
           @user = User.find(params[:id])
         end
 
-        def parsed_response(object: user, errors: {},
-                            options: {})
-          UserSerializer.new(
-            object,
-            options.merge!(errors)
-          ).serializable_hash.to_json
+        def object_serializer
+          UserSerializer
         end
 
         def user_params

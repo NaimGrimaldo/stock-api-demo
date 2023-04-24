@@ -159,6 +159,7 @@ es-MX:
           quantity_overflowed: 'La cantidad de stock no esta dentro del rango permitido.'
           discontinued: 'El producto se encuentra descontinuado.'
         transaction:
+          negative_quantity: Cantidad inferior a 0
           max_stock_quantity_overflowed: 'El producto supera el stock máximo permitido.'
           min_stock_quantity_overflowed: 'El producto no cuenta con el stock necesario.'
           not_allowed_for_provider: 'Tipo de transacción no permitida para Proveedores'

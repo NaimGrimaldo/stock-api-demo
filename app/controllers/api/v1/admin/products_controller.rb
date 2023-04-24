@@ -8,28 +8,28 @@ module Api
 
         def index
           collection = Product.all
-          render json: parsed_response(object: collection)
+          render json: serialized_response(collection)
         end
 
         def show
-          render json: parsed_response
+          render json: serialized_response(product)
         end
 
         def create
           @product = Product.build(product_params)
           if product.save
-            render json: parsed_response, status: :created
+            render json: serialized_response(product), status: :created
           else
-            render json: parsed_response(errors: product.errors),
+            render json: serialized_response(product),
                    status: :unprocessable_entity
           end
         end
 
         def update
           if product.update(product_params)
-            render json: parsed_response, status: :created
+            render json: serialized_response(product), status: :created
           else
-            render json: parsed_response(errors: product.errors),
+            render json: serialized_response(product),
                    status: :unprocessable_entity
           end
         end
@@ -47,12 +47,8 @@ module Api
           @product = Product.find(params[:id])
         end
 
-        def parsed_response(object: product, errors: {},
-                            options: {})
-          ProductSerializer.new(
-            object,
-            options.merge!(errors)
-          ).serializable_hash.to_json
+        def object_serializer
+          ProductSerializer
         end
 
         def product_params
