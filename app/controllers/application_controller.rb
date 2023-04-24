@@ -19,7 +19,7 @@ class ApplicationController < ActionController::API
 
   def serialized_response(object, options: {}, serializer: object_serializer)
     meta = {}
-    if object.respond_to?(:errors) && object.errors.any?
+    if object.respond_to?(:errors) && object&.errors&.any?
       meta[:errors] = object.errors.full_messages.as_json
     end
     serializer.new(
