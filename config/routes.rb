@@ -3,7 +3,7 @@
 Rails.application.routes.draw do
   scope module: :api, defaults: { format: :json }, path: '' do
     scope module: :v1 do
-      root to: '/api/v1/application#health_check'
+      root to: '/application#health_check'
       scope module: :admin do
         concern :addressable do
           resources :addresses, shallow: true
