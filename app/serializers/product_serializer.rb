@@ -22,17 +22,5 @@
 #  updated_at               :datetime         not null
 #
 class ProductSerializer
-  include JSONAPI::Serializer
-  attributes :name,
-             :description,
-             :internal_id,
-             :purchase_price,
-             :sale_price,
-             :brand_id,
-             :stock_quantity,
-             :min_stock_quantity,
-             :max_stock_quantity,
-             :status, :brand_name,
-             :base_measurement_unit_name,
-             :product_presentation_nickname
+  
 end
